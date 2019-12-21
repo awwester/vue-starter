@@ -6,7 +6,13 @@ import store from './store'
 import BootstrapVue from 'bootstrap-vue'
 import '@/styles/custom.scss'
 
-Vue.use(BootstrapVue)
+Vue.use(BootstrapVue, {
+  'BToast': {
+    'toaster': 'b-toaster-bottom-right',
+    'autoHideDelay': 3000,
+    'variant': 'primary'
+  }
+})
 
 Vue.config.productionTip = false
 
