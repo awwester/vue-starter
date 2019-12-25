@@ -4,8 +4,11 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 import '@/styles/custom.scss'
 
+Vue.use(VueAxios, axios)
 Vue.use(BootstrapVue, {
   'BToast': {
     'toaster': 'b-toaster-bottom-right',
