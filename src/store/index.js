@@ -8,7 +8,7 @@ Vue.use(Vuex)
 
 const vuexLocalStorage = new VuexPersistence({
   storage: window.localStorage,
-  reducer: (state) => ({ auth: state.auth })
+  reducer: (state) => ({ auth: { token: state.auth.token } })
 })
 
 export default new Vuex.Store({

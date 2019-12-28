@@ -1,6 +1,6 @@
 <template>
   <div class="login-form-container">
-    <b-form @submit="onSubmit">
+    <b-form @submit="onSubmit" class="login-form">
       <b-form-group
         id="input-group-1"
         label="Email address:"

@@ -1,5 +1,6 @@
 <template>
   <div class="home text-center">
+    <h2 class="m-3">Welcome!</h2>
     <div class="link-container">
       <router-link to="/dashboard">Dashboard</router-link>
       <router-link to="/auth/login">Login</router-link>

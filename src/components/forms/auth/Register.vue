@@ -62,7 +62,6 @@ export default {
     name: 'RegisterForm',
     onSubmit (evt) {
       evt.preventDefault()
-      console.log(JSON.stringify(this.form))
     }
   }
 }
