@@ -25,16 +25,24 @@ export default {
       // After the user authenticates, save the token.
       state.token = data.key
       state.error = ''
+      axios.defaults.headers.common['Authorization'] = `Token ${data.key}`
     }
   },
   actions: {
-    async login ({ commit }, payload) {
+    async login ({ commit, dispatch }, payload) {
       try {
-        const response = await axios.post('http://localhost:8000/v1/auth/login/', payload)
+        const response = await axios.post(
+          'http://localhost:8000/v1/auth/login/',
+          payload
+        )
         commit('setUserToken', response.data)
       } catch {
         commit('setLoginError')
       }
+    },
+    async fetchMe ({ commit }) {
+      const response = await axios.get('http://localhost:8000/v1/users/me/')
+      commit('setUserData', response.data)
     }
   },
   getters: { }

@@ -57,9 +57,17 @@ export default {
         username: this.form.email,
         password: this.form.password
       }
-      const response = await this.$store.dispatch('auth/login', payload)
-      if (response === 'failure') {
+      try {
+        await this.$store.dispatch('auth/login', payload)
+      } catch {
         this.error = 'Could not login with these credentials'
+      }
+
+      try {
+        await this.$store.dispatch('auth/fetchMe')
+        this.$router.push('/dashboard')
+      } catch {
+        this.error = 'Could not fetch user data'
       }
     }
   }
