@@ -27,7 +27,7 @@
 Cypress.Commands.add('login', () => {
   // For now we'll do this, however this should be doing a quicker way of login.
   cy.visit('/auth/login')
-  cy.get('#login-email').type('admin')
+  cy.get('#login-username').type('admin')
   cy.get('#login-password').type('admin123')
   cy.get('.login-form').submit()
 })

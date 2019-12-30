@@ -3,12 +3,12 @@
     <b-form @submit="onSubmit" class="login-form">
       <b-form-group
         id="input-group-1"
-        label="Email address:"
-        label-for="login-email"
+        label="Username:"
+        label-for="login-username"
       >
         <b-form-input
-          id="login-email"
-          v-model="form.email"
+          id="login-username"
+          v-model="form.username"
           required
         ></b-form-input>
       </b-form-group>
@@ -40,7 +40,7 @@ export default {
   data () {
     return {
       form: {
-        email: '',
+        username: '',
         password: ''
       }
     }
@@ -54,7 +54,7 @@ export default {
     async onSubmit (evt) {
       evt.preventDefault()
       const payload = {
-        username: this.form.email,
+        username: this.form.username,
         password: this.form.password
       }
       try {

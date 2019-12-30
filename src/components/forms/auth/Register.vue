@@ -4,10 +4,10 @@
       <b-form-group
         id="input-group-1"
         label="Email address:"
-        label-for="login-email"
+        label-for="login-username"
       >
         <b-form-input
-          id="login-email"
+          id="login-username"
           v-model="form.email"
           type="email"
           required

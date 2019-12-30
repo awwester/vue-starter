@@ -12,7 +12,7 @@ describe('Authentication tests', () => {
   })
 
   it('Can successfully login', () => {
-    cy.get('#login-email').type('admin')
+    cy.get('#login-username').type('admin')
     cy.get('#login-password').type('admin123')
     cy.get('.login-form').submit()
   })
