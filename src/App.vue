@@ -13,6 +13,10 @@
   height: 100%;
 }
 
+html, body {
+  height: 100%;
+}
+
 .selector-for-some-widget {
   box-sizing: content-box;
 }
