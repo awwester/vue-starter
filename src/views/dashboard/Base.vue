@@ -4,8 +4,8 @@
       <b-nav vertical class="vertical-navbar">
         <div class="nav-links">
           <b-link to="/">Home</b-link>
-          <b-link to="/dashboard/purchases">Purchases</b-link>
-          <b-link to="/dashboard/items">Items</b-link>
+          <b-link to="/dashboard/purchases"><FontAwesomeIcon icon="dollar-sign" /> Purchases</b-link>
+          <b-link to="/dashboard/items"><FontAwesomeIcon icon="burn" /> Items</b-link>
         </div>
       </b-nav>
     </div>
@@ -37,7 +37,12 @@ export default { name: 'dashboardBase' }
   &:hover {
     text-decoration: none;
     color: white;
-    font-weight: bold;
+    background-color: $secondary;
+  }
+
+  svg {
+    margin-bottom: 3px;
+    margin-right: 5px;
   }
 }
 
