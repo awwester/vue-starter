@@ -7,11 +7,11 @@ import BootstrapVue from 'bootstrap-vue'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faDollarSign, faBurn } from '@fortawesome/free-solid-svg-icons'
+import { faDollarSign, faBurn, faLock } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import '@/styles/custom.scss'
 
-library.add(faDollarSign, faBurn)
+library.add(faDollarSign, faBurn, faLock)
 
 Vue.component('FontAwesomeIcon', FontAwesomeIcon)
 Vue.use(VueAxios, axios)

@@ -26,6 +26,11 @@ export default {
       state.token = data.key
       state.error = ''
       axios.defaults.headers.common['Authorization'] = `Token ${data.key}`
+    },
+    logoutUser (state) {
+      // Clear the user's token
+      state.token = ''
+      delete axios.defaults.headers.common['Authorization']
     }
   },
   actions: {
@@ -43,6 +48,9 @@ export default {
     async fetchMe ({ commit }) {
       const response = await axios.get('http://localhost:8000/v1/users/me/')
       commit('setUserData', response.data)
+    },
+    logout ({ commit }) {
+      commit('logoutUser')
     }
   },
   getters: { }

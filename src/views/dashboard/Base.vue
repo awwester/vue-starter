@@ -3,9 +3,9 @@
     <div class="vertical-navbar-container col-sm-2">
       <b-nav vertical class="vertical-navbar">
         <div class="nav-links">
-          <b-link to="/">Home</b-link>
-          <b-link to="/dashboard/purchases"><FontAwesomeIcon icon="dollar-sign" /> Purchases</b-link>
-          <b-link to="/dashboard/items"><FontAwesomeIcon icon="burn" /> Items</b-link>
+          <b-link id="vert-nav-purchases" to="/dashboard/purchases"><FontAwesomeIcon icon="dollar-sign" />Purchases</b-link>
+          <b-link id="vert-nav-items" to="/dashboard/items"><FontAwesomeIcon icon="burn" />Items</b-link>
+          <b-link @click="logout" id="vert-nav-logout"><FontAwesomeIcon icon="lock" />Logout</b-link>
         </div>
       </b-nav>
     </div>
@@ -16,7 +16,16 @@
 </template>
 
 <script>
-export default { name: 'dashboardBase' }
+export default {
+  name: 'dashboardBase',
+  methods: {
+    logout (evt) {
+      evt.preventDefault()
+      this.$store.dispatch('auth/logout')
+      this.$router.push('/')
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -42,7 +51,7 @@ export default { name: 'dashboardBase' }
 
   svg {
     margin-bottom: 3px;
-    margin-right: 5px;
+    margin-right: 10px;
   }
 }
 

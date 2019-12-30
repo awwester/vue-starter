@@ -6,18 +6,22 @@ describe('Authenticated navigation tests', () => {
     cy.wait(100)
   })
 
-  it('Visits the dashboard', () => {
+  it('Can navigate to dashboard pages', () => {
     cy.visit('/dashboard')
-    cy.get('#dashboard-nav').should('exist')
-  })
-
-  it('Visits dashboard items', () => {
-    cy.visit('/dashboard/items')
+    cy.get('.nav-links').should('exist')
+    cy.get('#vert-nav-items').click()
     cy.contains('.dashboard-items', '1, 2, 3')
+    cy.get('#vert-nav-purchases').click()
+    cy.contains('.dashboard-purchases', '4, 5, 6')
   })
 
-  it('Visits dashboard purchases', () => {
-    cy.visit('/dashboard/purchases')
-    cy.contains('.dashboard-purchases', '4, 5, 6')
+  it('Can logout', () => {
+    cy.visit('/dashboard')
+    cy.get('#vert-nav-logout').click()
+    cy.contains('h2', 'Welcome!')
+
+    // Verify that the token is gone by trying to go back to dashboard.
+    cy.visit('/dashboard')
+    cy.contains('h2', 'Login')
   })
 })
