@@ -1,44 +1,54 @@
 <template>
-  <div class="login-form-container">
-    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+  <div class="register-form-container">
+    <b-form @submit="onSubmit" class="register-form" >
       <b-form-group
-        id="input-group-1"
-        label="Email address:"
-        label-for="login-username"
+        label="Username:"
+        label-for="register-username"
       >
         <b-form-input
-          id="login-username"
-          v-model="form.email"
-          type="email"
+          id="register-username"
+          v-model="form.username"
           required
         ></b-form-input>
       </b-form-group>
 
       <b-form-group
-        id="input-group-1"
-        label="Password:"
-        label-for="login-password"
+        label="Email address:"
+        label-for="register-email"
       >
         <b-form-input
-          id="login-password"
+          id="register-email"
+          type="email"
+          v-model="form.email"
+          required
+        ></b-form-input>
+      </b-form-group>
+
+      <b-form-group
+        label="Password:"
+        label-for="register-password-1"
+      >
+        <b-form-input
+          id="register-password-1"
           v-model="form.password"
           type="password"
           required
         ></b-form-input>
       </b-form-group>
+
       <b-form-group
-        id="input-group-1"
         label="Password (Repeat):"
-        label-for="login-password"
+        label-for="register-password-2"
       >
         <b-form-input
-          id="login-password"
+          id="register-password-2"
           v-model="form.passwordRepeat"
           type="password"
           required
         ></b-form-input>
       </b-form-group>
       <div class="text-center">
+        <b-alert variant="danger" show v-if="error.length">{{ error }}</b-alert>
         <router-link class="btn-cancel mr-4" to="/">Cancel</router-link>
         <b-button type="submit" variant="primary">Submit</b-button>
       </div>
@@ -48,20 +58,37 @@
 
 <script>
 export default {
+  name: 'RegisterForm',
   data () {
     return {
       form: {
-        email: '',
+        username: '',
         password: '',
-        passwordRepeat: ''
+        passwordRepeat: '',
+        email: ''
       },
       show: true
     }
   },
+  computed: {
+    error () {
+      return this.$store.state.auth.error
+    }
+  },
   methods: {
-    name: 'RegisterForm',
-    onSubmit (evt) {
+    async onSubmit (evt) {
       evt.preventDefault()
+
+      const payload = {
+        username: this.form.username,
+        password1: this.form.password,
+        password2: this.form.passwordRepeat
+      }
+
+      await this.$store.dispatch('auth/register', payload)
+      if (this.$store.state.auth.token) {
+        this.$router.push('/dashboard')
+      }
     }
   }
 }

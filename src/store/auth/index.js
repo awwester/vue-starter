@@ -17,15 +17,15 @@ export default {
       // Store the data about the user.
       state.user = data
     },
-    setLoginError (state) {
+    setAuthenticationError (state, message) {
       // Show an error for the login action.
-      state.error = 'Could not login with these credentials'
+      state.error = message
     },
-    setUserToken (state, data) {
+    setUserToken (state, token) {
       // After the user authenticates, save the token.
-      state.token = data.key
+      state.token = token
       state.error = ''
-      axios.defaults.headers.common['Authorization'] = `Token ${data.key}`
+      axios.defaults.headers.common['Authorization'] = `Token ${token}`
     },
     logoutUser (state) {
       // Clear the user's token
@@ -34,16 +34,20 @@ export default {
     }
   },
   actions: {
-    async login ({ commit, dispatch }, payload) {
+    async login ({ commit }, payload) {
       try {
-        const response = await axios.post(
-          'http://localhost:8000/v1/auth/login/',
-          payload
-        )
-        commit('setUserToken', response.data)
+        const response = await axios.post('http://localhost:8000/v1/auth/login/', payload)
+        commit('setUserToken', response.data.key)
       } catch {
-        commit('setLoginError')
+        commit('setAuthenticationError', 'Could not login with these credentials')
       }
+    },
+    register ({ commit }, payload) {
+      return axios.post('http://localhost:8000/v1/auth/registration/', payload).then((response) => {
+        commit('setUserToken', response.data.key)
+      }, () => {
+        commit('setAuthenticationError', 'Could not register with provided details')
+      })
     },
     async fetchMe ({ commit }) {
       const response = await axios.get('http://localhost:8000/v1/users/me/')
